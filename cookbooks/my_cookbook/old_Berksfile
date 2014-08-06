@@ -1,0 +1,6 @@
+source "https://supermarket.getchef.com"
+
+cookbook 'chef-client'
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'ntp'

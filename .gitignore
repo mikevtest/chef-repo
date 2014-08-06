@@ -4,3 +4,4 @@ RHEL64_C2
 Vagrantfile~
 .vagrant/
 var/
+chefdk-0.2.0-2.el6.x86_64.rpm

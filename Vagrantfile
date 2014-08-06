@@ -11,27 +11,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   #config.vm.box = "RHEL64"
-  #config.vm.box1 = "RHEL64_C1"
-  #config.vm.box2 = "RHEL64_C2"
-  #config.vm.box = "opscode-ubuntu-12.04"
-  #config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_provisionerless.box"
+  config.berkshelf.enabled = true
   config.omnibus.chef_version = :latest
   config.vm.define "box1" do |box1|
     box1.vm.box = "RHEL64"
-    #box1.vm.provision :shell, :path => "bootstrap.sh"
     box1.vm.network :forwarded_port, guest: 8080, host: 9090
     box1.vm.hostname = "box1"
   end
-  config.vm.define "box2" do |box2|
-    box2.vm.box= "RHEL64_C1"
-    box2.vm.network :forwarded_port, guest: 8080, host: 9091
-    box2.vm.hostname = "box2"
-  end
-  config.vm.define "box3" do |box3|
-    box3.vm.box = "RHEL64_C2"
-    box3.vm.network :forwarded_port, guest: 8080, host: 9092
-    box3.vm.hostname = "box3"
-  end
+#  config.vm.define "box2" do |box2|
+#    box2.vm.box= "RHEL64_C1"
+#    box2.vm.network :forwarded_port, guest: 8080, host: 9091
+#    box2.vm.hostname = "box2"
+#  end
+#  config.vm.define "box3" do |box3|
+#    box3.vm.box = "RHEL64_C2"
+#    box3.vm.network :forwarded_port, guest: 8080, host: 9092
+#    box3.vm.hostname = "box3"
+#  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -112,6 +108,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.validation_key_path = "/home/smithmw/Desktop/VagrantTests/.chef/mikevtest-validator.pem"
       chef.validation_client_name = "mikevtest-validator"
       chef.chef_server_url = "https://api.opscode.com/organizations/mikevtest"
+      chef.delete_node = true
+      chef.delete_client = true
   #   chef.cookbooks_path = "../my-recipes/cookbooks"
   #   chef.roles_path = "../my-recipes/roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
